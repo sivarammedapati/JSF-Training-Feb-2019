@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+</h:head>
+<h:body>
+		
+		<h2>Login</h2>
+		
+		<h:form id="loginForm" prependId="false">
+			
+			<p:growl id="messageGrowl" showDetail="true" showSummary="true"></p:growl>
+			
+			<p:panelGrid columns="3">
+				
+				<p:outputLabel for="userName" value="UserName"></p:outputLabel>
+				<p:inputText id="userName" value="#{userBean.userName}" 
+						required="true" requiredMessage="The Username field is required"></p:inputText>
+				<p:message for="userName" id="userNameMsg"></p:message>			
+				
+				<p:outputLabel for="password" value="Password"></p:outputLabel>
+				<p:password id="password" value="#{userBean.password}" 
+					required="true" requiredMessage="The Password field is required"></p:password>
+				<p:message for="password" id="passwordMsg"></p:message>	
+				
+				<p:commandButton value="Login" 
+					action="#{userBean.validate}"  
+						update="messageText messageGrowl userNameMsg passwordMsg"></p:commandButton>
+					
+				<p:commandButton value="Register" action="Hello?faces-redirect=true"></p:commandButton>	
+				
+			</p:panelGrid>
+			
+			<p>
+				<h:outputText id="messageText" value="#{userBean.message}"></h:outputText>
+			</p>
+		</h:form>
+		
+		
+</h:body>
+</html>
