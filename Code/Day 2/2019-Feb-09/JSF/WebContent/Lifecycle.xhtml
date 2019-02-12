@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+			xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Lifecycle</title>
+</h:head>
+<h:body>
+	<h2>JSF  Lifecycle</h2>
+	
+	<h:form>
+		<p>
+			No.of Controls: <h:inputText id="noOfControls"
+						value="#{lifecycleBean.noOfControls}" 
+						validatorMessage="Range 2-20"
+						valueChangeListener="#{lifecycleBean.onValueChange}" immediate="true">
+							<f:validateLongRange minimum="2" maximum="20"></f:validateLongRange>
+						</h:inputText>
+						
+			<span>
+				<h:message id="m1" for="noOfControls"></h:message>
+			</span>				
+		</p>
+		<p>
+			Message: <h:inputText id="message" value="#{lifecycleBean.message}" validatorMessage="MinLength-3">
+				<f:validateLength minimum="3"></f:validateLength>
+			</h:inputText>
+			
+			<span>
+				<h:message id="m2" for="message"></h:message>
+			</span>	
+		</p>
+		
+		<h:panelGrid id="panelGrid" columns="5" binding="#{lifecycleBean.panelGrid}"></h:panelGrid>
+		
+		<h:commandButton value="Redisplay" actionListener="#{lifecycleBean.redisplay}" ></h:commandButton>
+		
+		<h:commandButton value="Go To Hello" action="Hello?faces-redirect=true" immediate="true"></h:commandButton>
+		
+		<h:commandButton value="Ajax Update" actionListener="#{lifecycleBean.redisplay}">
+			<f:ajax execute="noOfControls message" render="panelGrid m1 m2"></f:ajax>
+		</h:commandButton>
+	</h:form>
+	
+</h:body>
+</html>
+
+
+
+
+
+
+

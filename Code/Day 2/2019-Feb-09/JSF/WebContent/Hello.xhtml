@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+		xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>Hello</title>
+</h:head>
+<h:body>
+		<h2>Hello JSF</h2>
+		
+		<div>
+			<h:outputText value="This is a simple JSF page"></h:outputText>
+		</div>
+		
+		<h:form>
+			<p>
+				Message: <h:inputText id="msg" value="#{messageBean.message}"></h:inputText>
+			</p>
+			<p>
+				<!-- <h:commandButton value="Click Me" action="Welcome"></h:commandButton> -->
+				<h:commandButton value="Click Me" action="#{messageBean.onClick}"></h:commandButton>
+			</p>
+			
+			<p>
+				Welcome Message: <h:outputText id="welcomeMsg" value="#{messageBean.welcomeMessage}"></h:outputText>
+			</p>
+			
+			<p>
+				<h:commandButton value="Ajax">
+					<f:ajax execute="msg" render="welcomeMsg"></f:ajax>
+				</h:commandButton>
+			</p>
+			
+		</h:form>
+		
+</h:body>
+</html>
+
+
+
