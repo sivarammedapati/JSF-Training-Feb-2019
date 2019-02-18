@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:cc="http://java.sun.com/jsf/composite">
+
+	<cc:interface>
+		
+		<cc:attribute name="cookies" default="true" required="true" type="java.lang.Boolean"></cc:attribute>
+		
+	</cc:interface>
+	
+	<cc:implementation>
+		
+		<p:panelGrid columns="2">
+		
+			<f:facet name="header">
+				<h4>Debug Information</h4>
+			</f:facet>
+		
+			<h:outputText value="Headers"></h:outputText>
+			<h:outputText value="#{header}"></h:outputText>
+			
+			<h:outputText value="Params"></h:outputText>
+			<h:outputText value="#{param}"></h:outputText>
+			
+			<h:outputText rendered="#{cc.attrs.cookies}" value="Cookies"></h:outputText>
+			<h:outputText rendered="#{cc.attrs.cookies}" value="#{cookie}"></h:outputText>
+
+		</p:panelGrid>
+	
+	</cc:implementation>
+</html>
+
+
+
+

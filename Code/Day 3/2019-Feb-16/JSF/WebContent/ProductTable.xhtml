@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+</h:head>
+<h:body>
+	
+	<h:form id="form">
+		<p:growl id="growl"></p:growl>
+	
+		<p:dataTable value="#{productController.products}" 
+				var="product" sortMode="multiple" editable="true">
+			
+			<p:ajax event="rowEdit" listener="#{productController.onRowEdit}" update=":form:growl"></p:ajax>
+			<p:ajax event="rowEditCancel" listener="#{productController.onRowEditCancel}" update=":form:growl"></p:ajax>
+			
+			
+			<f:facet name="header">
+				<h:outputText value="Product List"></h:outputText>
+			</f:facet>
+			<f:facet name="footer">
+				<h:outputText value="End of Page"></h:outputText>
+			</f:facet>
+			
+			<p:column headerText="ID" sortBy="#{product.id}" filterBy="#{product.id}">
+				<h:outputText value="#{product.id}"></h:outputText>
+			</p:column>
+			<p:column headerText="Name" sortBy="#{product.name}" filterBy="#{product.name}" filterMatchMode="contains">
+				
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{product.name}"></h:outputText>
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{product.name}"></p:inputText>
+					</f:facet>
+				</p:cellEditor>
+				
+			</p:column>
+			<p:column headerText="Price" sortBy="#{product.price}" filterBy="#{product.price}">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{product.price}">
+							<f:convertNumber type="currency" currencySymbol="$"></f:convertNumber>
+						</h:outputText>
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{product.price}"></p:inputText>
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			<p:column headerText="Category" sortBy="#{product.category}" filterBy="#{product.category}">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{product.category}"></h:outputText>
+					</f:facet>
+					<f:facet name="input">
+						<p:selectOneMenu value="#{product.category}">
+							<f:selectItem itemLabel="Select" itemValue=""></f:selectItem>
+							<f:selectItem itemLabel="Mobiles" itemValue="Mobiles"></f:selectItem>
+							<f:selectItem itemLabel="Laptops" itemValue="Laptops"></f:selectItem>
+							<f:selectItem itemLabel="Devices" itemValue="Devices"></f:selectItem>
+							<f:selectItem itemLabel="Drives" itemValue="Drives"></f:selectItem>
+						</p:selectOneMenu>
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+			<p:column>
+				<p:rowEditor></p:rowEditor>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

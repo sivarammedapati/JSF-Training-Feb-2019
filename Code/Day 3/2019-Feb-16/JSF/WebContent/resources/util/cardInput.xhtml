@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:cc="http://java.sun.com/jsf/composite">
+		
+		<cc:interface>
+			<cc:attribute name="images" required="false" type="java.util.List"></cc:attribute>
+			<cc:attribute name="cardNoLabel" required="false" type="java.lang.String" default="Card No."></cc:attribute>
+			<cc:attribute name="nameLabel" required="false" type="java.lang.String" default="Name."></cc:attribute>
+			
+			<cc:attribute name="cardNo"></cc:attribute>
+			<cc:attribute name="name"></cc:attribute>
+			<cc:attribute name="eYear"></cc:attribute>
+			<cc:attribute name="eMonth"></cc:attribute>
+			<cc:attribute name="cvv"></cc:attribute>
+			<cc:attribute name="amount"></cc:attribute>
+			
+			<cc:attribute name="pay" method-signature="void action()"></cc:attribute>
+			
+			<cc:editableValueHolder name="nameInput" targets="cardInputForm:name"></cc:editableValueHolder>
+						
+			<cc:facet name="header"></cc:facet>
+		</cc:interface>
+
+		<cc:implementation>
+			
+			<h:outputStylesheet name="styles/cardInput.css"></h:outputStylesheet>
+			
+			<h:form id="cardInputForm">
+				<p:panelGrid>
+					
+					<p:row>
+						<p:column colspan="5">
+							<cc:renderFacet name="header"></cc:renderFacet>
+						</p:column>
+					</p:row>
+				
+					<p:row>
+						<ui:repeat var="image" value="#{cc.attrs.images}">
+							<p:column>
+								<p:graphicImage  url="#{image}" height="20" width="25"></p:graphicImage>
+							</p:column>
+						</ui:repeat>
+					</p:row>
+				
+					<p:row>
+						<p:column colspan="5">
+							<h:outputText value="#{cc.attrs.cardNoLabel}"></h:outputText>
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column colspan="5">
+							<p:inputText maxlength="16" 
+								placeholder="Enter the Card No." value="#{cc.attrs.cardNo}"></p:inputText>
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column colspan="5">
+							<h:outputText value="#{cc.attrs.nameLabel}"></h:outputText>
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column colspan="5">
+							<p:inputText id="name" placeholder="Enter the Name." 
+								value="#{cc.attrs.name}" required="true" requiredMessage="Name is required">
+								
+							</p:inputText>
+							<p:message for="@previous"></p:message>
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column colspan="2">
+							<h:outputText value="Expiry Date"></h:outputText>
+						</p:column>
+						<p:column colspan="2"></p:column>
+						<p:column colspan="1">
+							<h:outputText value="CVV Code"></h:outputText>
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column colspan="2">
+							<p:selectOneMenu value="#{cc.attrs.eMonth}">
+								<f:selectItem itemLabel="Select" itemValue="-1"></f:selectItem>
+								<f:selectItem itemLabel="01" itemValue="01"></f:selectItem>
+								<f:selectItem itemLabel="02" itemValue="02"></f:selectItem>
+								<f:selectItem itemLabel="03" itemValue="03"></f:selectItem>
+								<f:selectItem itemLabel="03" itemValue="04"></f:selectItem>
+							</p:selectOneMenu>
+						</p:column>
+						<p:column colspan="2">
+							<p:selectOneMenu value="#{cc.attrs.eYear}">
+								<f:selectItem itemLabel="Select" itemValue="-1"></f:selectItem>
+								<f:selectItem itemLabel="2019" itemValue="2019"></f:selectItem>
+								<f:selectItem itemLabel="2020" itemValue="2020"></f:selectItem>
+								<f:selectItem itemLabel="2021" itemValue="2021"></f:selectItem>
+								<f:selectItem itemLabel="2012" itemValue="2012"></f:selectItem>
+							</p:selectOneMenu>
+						</p:column>
+						<p:column colspan="1">
+							<p:password maxlength="3" size="3" value="#{cc.attrs.cvv}"></p:password>
+						</p:column>
+					</p:row>
+					<p:row>
+						<p:column colspan="3">
+							<h:outputText value="#{cc.attrs.amount}">
+								<f:convertNumber type="currency" currencySymbol="$"></f:convertNumber>
+							</h:outputText>
+						</p:column>
+						<p:column colspan="2">
+							<p:commandButton action="#{cc.attrs.pay}" 
+								styleClass="ui-cardinput-button" value="Pay" update="@form"></p:commandButton>
+						</p:column>
+					</p:row>
+					
+				</p:panelGrid>
+			</h:form>
+			
+		</cc:implementation>
+</html>
+
+
+
+
+
+
+
+
+

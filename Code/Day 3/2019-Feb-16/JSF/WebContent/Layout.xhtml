@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:util="http://java.sun.com/jsf/composite/util">
+	
+	<ui:composition>
+		
+		<h:head>
+			<title>
+				<ui:insert name="title">PrimeFaces</ui:insert>
+			</title>
+			<style>
+				<ui:insert name="styles"></ui:insert>
+			</style>
+			<script>
+				<ui:insert name="scripts"></ui:insert>
+			</script>
+		</h:head>
+		<h:body>
+			<div>
+				<p:panel>
+					<f:facet name="header">
+						<h2>PrimeFaces Application</h2>
+					</f:facet>
+					<p:themeSwitcher>
+						<f:selectItem itemLabel="AfterDark" itemValue="afterdark"></f:selectItem>
+						<f:selectItem itemLabel="BlueSky" itemValue="bluesky"></f:selectItem>
+						<f:selectItem itemLabel="Cruze" itemValue="cruze"></f:selectItem>
+						<f:selectItem itemLabel="Default" itemValue="aristo"></f:selectItem>
+						
+					</p:themeSwitcher>
+					<p:menubar>
+						<p:menuitem value="Home" outcome="Hello"></p:menuitem>
+						<p:menuitem value="Products" outcome="Products"></p:menuitem>
+						<p:menuitem value="Organigram" outcome="IPL"></p:menuitem>
+						<p:menuitem value="Context" outcome="Context"></p:menuitem>
+						<p:menuitem value="Components" outcome="Components"></p:menuitem>
+					</p:menubar>
+				</p:panel>
+			</div>
+			
+			<div>
+				<ui:insert name="content"></ui:insert>
+			</div>
+			
+			
+			<ui:debug hotkey="x"></ui:debug>
+			<ui:remove>
+				<p:log></p:log>
+			</ui:remove>
+			
+		
+		</h:body>
+	
+	
+	</ui:composition>
+	
+	
+</html>
+
+
