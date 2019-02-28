@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Products</title>
+</h:head>
+<h:body>
+	
+	<h:form id="myForm">	
+		<p:panel header="Products">
+			
+			<p:dataList value="#{productController.products}" 
+					var="product" style="width: 400px" type="definition"
+					paginator="true" rows="2" paginatorPosition="bottom"
+					paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="2,3,5,10">
+			
+				<p:panel>
+					<f:facet name="header">
+						<h:outputText value="#{product.name}"></h:outputText>
+					</f:facet>
+					
+					<p:panelGrid columns="3">
+						<h:outputText value="#{product.price}"></h:outputText>
+						<h:outputText value="#{product.category}"></h:outputText>
+						<p:commandLink value="View Details" update=":myForm:prdDialog" 
+																oncomplete="PF('prdDialogWd').show()">
+							<f:setPropertyActionListener value="#{product}" 
+									target="#{productController.selectedProduct}"></f:setPropertyActionListener>
+						</p:commandLink>
+					</p:panelGrid>
+				</p:panel>
+			
+			</p:dataList>
+			
+			<p:dialog id="prdDialog" widgetVar="prdDialogWd" modal="true">
+				
+				<p:panel header="Product Details" rendered="#{not empty productController.selectedProduct}">
+					
+					<h:outputText value="The Details of the Product"></h:outputText>
+					<p:panelGrid columns="1">
+						<h:outputText value="#{productController.selectedProduct.id}"></h:outputText>
+						<h:outputText value="#{productController.selectedProduct.name}"></h:outputText>
+						<h:outputText value="#{productController.selectedProduct.price}"></h:outputText>
+						<h:outputText value="#{productController.selectedProduct.category}"></h:outputText>
+					</p:panelGrid>
+				</p:panel>
+				
+			</p:dialog>
+			
+			
+		</p:panel>
+	</h:form>	
+		
+		
+</h:body>
+</html>

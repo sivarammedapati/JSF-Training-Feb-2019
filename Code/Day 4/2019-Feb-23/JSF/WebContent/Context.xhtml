@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:p="http://primefaces.org/ui"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+		
+		
+		<ui:composition template="/Layout.xhtml">
+		
+			<ui:define name="title">Context</ui:define>
+			<ui:define name="scripts">
+				function updateStatus(percent){
+					console.log(percent);
+				}
+				function save(){
+					console.log("saving to server");
+					rc();
+					console.log("save complete");
+				}
+			</ui:define>
+			
+			<ui:define name="content">
+				
+				<h:form>
+		
+					<p:remoteCommand id="rc" name="rc"  action="#{contextView.save}" update="@form"></p:remoteCommand>
+				
+					<p:panelGrid columns="2">
+						
+						<p:outputLabel for="@next" value="ProductId"></p:outputLabel>
+						<p:inputText value="#{contextView.product.id}"></p:inputText>
+						
+						<p:outputLabel for="@next" value="Name"></p:outputLabel>
+						<p:inputText value="#{contextView.product.name}"></p:inputText>
+						
+						<p:commandButton action="#{contextView.save}" value="Save"></p:commandButton>
+						<p:commandButton type="button" onclick="save();" value="ClientSave"></p:commandButton>
+					</p:panelGrid>
+				</h:form>
+			
+			</ui:define>
+		
+		</ui:composition>
+</html>
+
+
+

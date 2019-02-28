@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:util="http://java.sun.com/jsf/composite/util">
+
+	<ui:composition template="/Layout.xhtml">
+	
+		<ui:define name="content">
+			
+			<!-- <util:debug cookies="false"></util:debug> -->
+			
+			<util:cardInput id="cardInput_1" images="#{compositeController.images}" 
+						nameLabel="Name of Card Holder:"
+						cardNo="#{compositeController.payDetails.cardNo}"
+						name="#{compositeController.payDetails.name}"
+						eYear="#{compositeController.payDetails.expiryYear}"
+						eMonth="#{compositeController.payDetails.expiryMonth}"
+						cvv="#{compositeController.payDetails.cvvCode}"
+						amount="#{compositeController.payDetails.amount}"
+						pay="#{compositeController.pay}">
+						
+				<f:facet name="header">
+					<p:outputLabel value="Card Validator"></p:outputLabel>
+				</f:facet>
+				
+				<f:validateLength minimum="3" for="nameInput"></f:validateLength>
+				<f:convertNumber type="currency" currencySymbol="$$" for="amountOutput"></f:convertNumber>
+				
+				<p:ajax event="cardNoBlur" ></p:ajax>
+			</util:cardInput>
+		
+		</ui:define>
+	
+	</ui:composition>
+
+
+</html>

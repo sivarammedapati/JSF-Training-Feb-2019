@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<facelet-taglib version="2.0" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xml="http://www.w3.org/XML/1998/namespace" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facelettaglibrary_2_0.xsd ">
+  
+  <namespace>http://triygn.com/components/ui</namespace>
+  
+  <tag>
+  	<tag-name>digitalClock</tag-name>
+  	<component>
+  		<component-type>triygn.components.DigitalClock</component-type>
+  		<renderer-type>triygn.components.DigitalClockRenderer</renderer-type>
+  	</component>
+  	<attribute>
+  		<name>color</name>
+  		<required>false</required>
+  		<type>java.lang.String</type>
+  	</attribute>
+  	<attribute>
+  		<name>fontSize</name>
+  		<required>false</required>
+  		<type>java.lang.Integer</type>
+  	</attribute>
+  	<attribute>
+  		<name>widgetVar</name>
+  		<required>false</required>
+  		<type>java.lang.String</type>
+  	</attribute>
+  </tag>
+  
+  <tag>
+  	<tag-name>switch</tag-name>
+  	<component>
+  		<component-type>triygn.components.SwitchButton</component-type>
+  		<renderer-type>triygn.components.SwitchButtonRenderer</renderer-type>
+  	</component>
+  	<attribute>
+  		<name>widgetVar</name>
+  		<required>false</required>
+  		<type>java.lang.String</type>
+  	</attribute>
+  </tag>
+</facelet-taglib>

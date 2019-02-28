@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<ui:composition template="/Layout.xhtml">
+	
+		<ui:define name="content">
+			<p:accordionPanel>
+				
+				<p:tab title="Charts">			
+					<p:tabView>
+						<p:tab title="Bar">
+							<p:chart type="bar" model="#{chartView.barChartModel}"></p:chart>
+						</p:tab>
+						<p:tab title="Pie">
+							<p:chart type="pie" model="#{chartView.pieChartModel}"></p:chart>
+						</p:tab>
+						<p:tab title="Line">
+							<p:chart type="line" model="#{chartView.lineChartModel}"></p:chart>
+						</p:tab>
+					</p:tabView>
+					
+				</p:tab>
+				<p:tab title="File">
+				
+					<h:form enctype="multipart/form-data">
+					
+						<p:messages id="msgs"></p:messages>
+						<p:panel>
+							<f:facet name="header">
+								<h4>File Upload</h4>
+							</f:facet>
+							
+							<p:fileUpload mode="advanced" 
+									fileUploadListener="#{fileController.fileUpload}"
+									update="msgs"></p:fileUpload>
+									
+							<br/><br/><br/>		
+						
+							<p:fileUpload mode="simple" value="#{fileController.uploadedFile}" ></p:fileUpload>			
+						
+							<p:commandButton value="Upload" 
+									action="#{fileController.upload}" ajax="false"></p:commandButton>
+						
+						</p:panel>
+					</h:form>
+					
+				
+				</p:tab>
+				<p:tab title="Products"></p:tab>
+			
+			</p:accordionPanel>
+		</ui:define>
+	
+	</ui:composition>
+
+</html>

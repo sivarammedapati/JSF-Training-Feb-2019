@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:p="http://primefaces.org/ui">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Register</title>
+
+<script>
+	
+	function validateName(){
+		
+		var name = $("#registerForm\\:name").val();
+		var reqExpr = /^[A-Za-z]{3,}$/;
+		
+		var msg = $("#registerForm\\:nameMsg");
+		if(reqExpr.test(name)){
+			
+			msg.text("");
+			msg.attr("class", "");
+			
+		}else{
+			
+			msg.text("Invalid UserName");
+			msg.attr("class", "ui-message ui-message-error ui-widget ui-message-corner-all");
+		}
+		
+	}
+
+</script>
+
+</h:head>
+<h:body>
+	
+		<h:form id="registerForm">
+			<p:panel header="Register">
+				
+				<p:fieldset legend="User Details">
+					<p:panelGrid columns="3">
+						
+					
+						<p:outputLabel for="username" value="UserName:"></p:outputLabel>
+						<p:inputText id="username" 
+							value="#{registerController.user.userName}" 
+							validatorMessage="Minlenght of 3" required="true" requiredMessage="UserName is required">
+							<f:validateLength minimum="3"></f:validateLength>
+							<p:ajax listener="#{registerController.validateUserName}" 
+											event="blur" update="@next @this @previous"></p:ajax>
+						</p:inputText>
+						<p:message for="@previous"></p:message>
+					
+					
+						<p:outputLabel id="pwdLabel" for="@next" value="Password:"></p:outputLabel>
+						<p:password  value="#{registerController.user.password}" 
+													feedback="true" required="true" 
+													requiredMessage="Password is required" match="cpwd">
+							<p:ajax event="blur" update="@next @previous"></p:ajax>						
+						</p:password>
+						<p:message id="pwdMsg"  for="@previous"></p:message>
+						
+						<p:outputLabel for="@next" value="Confirm Password"></p:outputLabel>
+						<p:password id="cpwd"  feedback="false">
+							<p:ajax process="@form" update="pwdMsg pwdLabel"></p:ajax>
+						</p:password>
+						<p:message for="@previous"></p:message>
+						
+						<p:outputLabel for="name" value="Name:"></p:outputLabel>
+						<p:inputText id="name" value="#{registerController.user.name}" onchange="validateName();">
+							
+						</p:inputText>
+						<p:message id="nameMsg" for="@previous"></p:message>
+						
+						<p:outputLabel for="@next" value="Location"></p:outputLabel>
+						<p:selectOneMenu value="#{registerController.user.location}">
+							<f:selectItem itemLabel="Select a Location" itemValue=""></f:selectItem>
+							<f:selectItem itemLabel="Mumbai" itemValue="Mumbai"></f:selectItem>
+							<f:selectItem itemLabel="Pune" itemValue="Pune"></f:selectItem>
+						</p:selectOneMenu>
+						<p:message for="@previous"></p:message>
+						
+						<p:outputLabel for="@next" value="Enable Subscriptions"></p:outputLabel>
+						<p:selectBooleanButton offLabel="No" onLabel="Yes" 
+								value="#{registerController.user.enableSubscriptions}">
+							<p:ajax update="subscriptions"></p:ajax>
+						</p:selectBooleanButton>
+						<p:message for="@previous"></p:message>
+						
+						
+						
+						<h:outputText value=""></h:outputText>
+						<p:commandButton action="#{registerController.saveUser}" 
+							value="Save" update="@form"></p:commandButton>
+						
+					</p:panelGrid>
+				</p:fieldset>
+				
+				<p:panel header="Subscriptions" id="subscriptions">
+					<h:outputText value="Subsciptions Enabled: #{registerController.user.enableSubscriptions}">
+					</h:outputText>
+					
+					<p:panel rendered="#{registerController.user.enableSubscriptions}">
+						<p:outputLabel for="@next" value="Enable SMS Subscriptions"></p:outputLabel>
+						<p:selectBooleanCheckbox value="#{registerController.user.smsSubscriptions}"></p:selectBooleanCheckbox>
+					</p:panel>
+					
+					
+				</p:panel>
+				
+			</p:panel>
+		</h:form>	
+</h:body>
+</html>
+
+
+
+
+
+
+
+
+
+
